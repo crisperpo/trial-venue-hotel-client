@@ -1,5 +1,7 @@
 /*Variables*/
 $color-bg: #FFFFFF;
+$color-item-bg: #FAFAFA;
+
 $color-border-head-top: #296CAF;
 $color-border-head-bottom: #CCCCCC;
 $color-border-div: #808080;
@@ -41,7 +43,7 @@ body {
   height: 100%;
 }
 
-body, p, input, select, textarea {
+body, p {
   color: $color-font-text;
   font-family: $font-regular;
   font-weight: $font-weight;
@@ -49,19 +51,35 @@ body, p, input, select, textarea {
   font-size: 10pt;
 }
 
+input, select, textarea {
+  color: $color-font-text;
+  font-family: $font-regular;
+  font-size: 10pt;
+  font-weight: $font-weight;
+  line-height: 1.55em;
+}
+
 h1 {
   font-family: $font-light;
   color: $color-font-title;
   margin-bottom: 0.5em;
-  font-size: 18pt;
+  font-size: 16pt;
   line-height: 1em;
 }
 
 h2 {
   font-family: $font-light;
   color: $color-font-title;
-  font-size: 14pt;
-  margin-bottom: 0.5em;
+  font-size: 12pt;
+  margin: 1em 0;
+  line-height: 1em;
+}
+
+h3 {
+  font-family: $font-light;
+  color: $color-font-title;
+  font-size: 10pt;
+  margin-bottom: 0.3em;
   line-height: 1em;
 }
 
@@ -80,62 +98,15 @@ img {
   border: 0;
 }
 
-/*Grid*/
-.row {
-  display: block;
-  width: 100%;
 
-  .col {
-    display: inline-block;
-    vertical-align: top;
-  }
-  .col-1 {
-    width: 8.33333%;
-  }
-  .col-2 {
-    width: 16.66667%;
-  }
-  .col-3 {
-    width: 25%;
-  }
-  .col-4 {
-    width: 33.33333%;
-  }
-  .col-5 {
-    width: 41.66667%;
-  }
-  .col-6 {
-    width: 50%;
-  }
-  .col-7 {
-    width: 58.33333%;
-  }
-  .col-8 {
-    width: 66.66667%;
-  }
-  .col-9 {
-    width: 75%;
-  }
-  .col-10 {
-    width: 83.33333%;
-  }
-  .col-11 {
-    width: 91.66667;
-  }
-  .col-12 {
-    width: 100%;
-  }
-}
+.imgResponsive {
 
-.img-responsive {
-  display: block;
-  max-width: 100%;
-  height: auto;
 }
 
 /*Custom*/
-.content {
-  margin: 6em 1em 1em;
+.app {
+  display: flex;
+  justify-content: center;
 }
 
 #header {
@@ -176,6 +147,7 @@ img {
   }
   .userMenu {
     align-self: center;
+    white-space: nowrap;
     text-align: right;
     padding: 0 10px;
     border-left: 1px dashed $color-border-head-bottom;
@@ -186,6 +158,146 @@ img {
   }
 }
 
+/*Grid*/
+.flex-grid {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-grid .col {
+  width: 50%;
+}
+
+/*Content*/
+.content {
+  width: 100%;
+  margin: 6em 1em 1em;
+
+  /*Admin View*/
+  .adminView {
+    .addHotelForm {
+      border-bottom: 1px dotted $color-border-head-bottom;
+
+      .fieldsContainer{
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+
+        .fieldWrap {
+          flex-basis: 150px;
+          margin-bottom:0.5em;
+          padding: 5px;
+
+          label{
+            font-family: $font-light;
+            font-size: 0.9em;
+            display: block;
+            text-align: left;
+          }
+
+          input, select {
+            border-width:1px;
+            border-style: solid;
+            border-color: $color-border-head-bottom;
+            background-color: $color-bg;
+            font-family: $font-light;
+            font-size: 0.9em;
+            padding: 3px;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            box-sizing:border-box;
+            width: 100%;
+
+            &.invalid{
+              border: 1px solid $color-field-invalid;
+              background: url(../img/icons/icn_exclamation_circle_fill_red.svg) no-repeat scroll 4px 4px;
+              background-position: right;
+              background-size: 14px;
+            }
+          }
+          select {
+            padding: 4px;
+          }
+        }
+      }
+        .btnSubmit{
+          background-color: $color-modal-btn-bg;
+          color: $color-modal-btn-text;
+          font-family: $font-regular;
+          font-size: 1em;
+          font-weight:500;
+          line-height: 2em;
+          border: medium none;
+          border-radius: 3px;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          box-shadow: none;
+          margin: 1em 0;
+          padding: 0;
+          width: 50px;
+          display: inline-block;
+        }
+    }
+
+    .hotelList {
+      .hotelContainer {
+        background-color: $color-bg;
+        box-shadow: 0 1px 4px $color-border-head-bottom;
+        -moz-box-shadow: 0 1px 4px $color-border-head-bottom;
+        -webkit-box-shadow: 0 1px 4px $color-border-head-bottom;
+        border-radius: 3px;
+        padding: 1em;
+        margin-bottom: 1em;
+        position: relative;
+
+        .btnClose {
+          color: $color-border-head-bottom;
+          position: absolute;
+          right: -5px;
+          top: -5px;
+          text-decoration: none;
+          font-size: 1.2em;
+          background-color: $color-item-bg;
+          border-radius: 50%;
+          padding: 3px;
+          line-height: 10px;
+
+          &:after {
+            content: '×';
+          }
+          &:hover {
+            color: $color-font-text;
+          }
+        }
+        .featuresContainer {
+          h3 {
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+            span {
+              color: $color-font-text;
+              word-break: break-all;
+              font-size: 0.8em;
+            }
+          }
+        }
+        .imageContainer {
+          text-align: right;
+
+          img {
+            display: inline-flex;
+            max-width: 100%;
+            max-height: 98px;
+          }
+        }
+      }
+    }
+
+  }
+
+
+}
+
 /********************************************************************************/
 /*MEDIA QUERIES
 /********************************************************************************/
@@ -193,18 +305,12 @@ img {
 
   h2 {
     font-size: 11pt;
-    text-align: center;
   }
-  .row {
+  .fieldsContainer {
     display: block;
-    width: 100%;
-
-    .col {
-      display: inline-block;
-      vertical-align: top;
-    }
-    .col-sm-12 {
+    .fieldWrap {
       width: 100%;
+      flex-basis: unset;
     }
   }
 
@@ -229,6 +335,29 @@ img {
 
     p, input, select, textarea, a {
       font-size: 8pt;
+    }
+  }
+}
+@media all and (max-width: 360px) {
+  .flex-grid {
+    display: block;
+    .col {
+      width: 100%;
+      margin: 0 0 10px 0;
+
+      img {
+        width: 100%;
+        max-height: unset;
+      }
+    }
+
+  }
+  .fieldsContainer {
+    display: block !important;
+
+    .fieldWrap {
+      width: 100%;
+      flex-basis: unset;
     }
   }
 }
