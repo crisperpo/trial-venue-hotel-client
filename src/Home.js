@@ -32,7 +32,6 @@ class Home extends Component {
     render() {
         return (
             <div className="homeView">
-
                 <HotelList hotels={this.state.hotels} deleteHotel={this.deleteHotel} amenities={this.state.amenities} priceCategories={this.state.priceCategories}/>
             </div>
         );

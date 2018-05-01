@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {NavLink} from "react-router-dom";
 
 class HotelContainer extends Component {
     constructor(props) {
@@ -56,7 +57,9 @@ class HotelContainer extends Component {
                             </div>
                             <div className="bookingContainer col-sm">
                                 <div className="rating">{h.rating}</div>
-                                <button className="btn btnDetail">Details</button>
+                                <NavLink exact to={"/hotels/"+h.id}>
+                                    <button className="btn btnDetail">Details</button>
+                                </NavLink>
                             </div>
                         </div>
                     )}
