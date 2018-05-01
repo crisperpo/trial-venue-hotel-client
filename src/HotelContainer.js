@@ -17,6 +17,7 @@ class HotelContainer extends Component {
         if (!Array.isArray(selectedOptions)) {
             return allOptions[selectedOptions];
         }
+
         for (var i = 0, l = selectedOptions.length; i < l; i++) {
             amenitiesLabels.push( allOptions[selectedOptions[i]] );
         }

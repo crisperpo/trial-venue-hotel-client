@@ -99,13 +99,13 @@ class HotelForm extends Component {
                         <label className="inputLabel">
                             Rating (0 - 5)
                         </label>
-                        <input type="range" min="0" max="5" className="formControl" id="_hotelRating" ref={(r) => this._hotelRating = r} onChange={this.handleChange} onBlur={this.handleChange} placeholder="Rating..." />
+                        <input type="range" min="0" max="5" step="0.01" className="formControl" id="_hotelRating" ref={(r) => this._hotelRating = r} onChange={this.handleChange} onBlur={this.handleChange} placeholder="Rating..." />
                     </div>
                     <div className="fieldWrap">
                         <label className="inputLabel">
                             Price category
                         </label>
-                        <select className="formControl" id="_hotelPriceCategory" ref={(r) => this._hotelPriceCategory = r} onChange={this.handleChange} onBlur={this.handleChange} placeholder="Price category...">
+                        <select className="formControl" id="_hotelPriceCategory" ref={(r) => this._hotelPriceCategory = r} onChange={this.handleChange} onBlur={this.handleChange}>
                             {optionsPriceCategories}
                         </select>
                     </div>
@@ -113,7 +113,7 @@ class HotelForm extends Component {
                         <label className="inputLabel">
                             Amenities
                         </label>
-                        <select multiple className="formControl" id="_hotelAmenities" ref={(r) => this._hotelAmenities = r} onChange={this.handleChange} onBlur={this.handleChange} placeholder="Amenities...">
+                        <select multiple className="formControl" id="_hotelAmenities" ref={(r) => this._hotelAmenities = r} onChange={this.handleChange} onBlur={this.handleChange} >
                             {optionsAmenities}
                         </select>
                     </div>
