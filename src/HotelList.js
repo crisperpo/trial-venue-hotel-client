@@ -8,7 +8,7 @@ class HotelList extends Component {
         this.deleteHotel = this.deleteHotel.bind(this);
     }
     createHotels(hotel) {
-        return <HotelContainer key={hotel.id} hotel={hotel} deleteHotel={this.deleteHotel} amenities={this.props.amenities} priceCategories={this.props.priceCategories}/>
+        return <HotelContainer admin={this.props.admin} key={hotel.id} hotel={hotel} deleteHotel={this.deleteHotel} amenities={this.props.amenities} priceCategories={this.props.priceCategories}/>
     }
     deleteHotel(id) {
         this.props.deleteHotel(id);

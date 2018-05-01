@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import uuidv4 from "uuid";
-import Select from "react-select";
 
 class HotelForm extends Component {
     constructor(props) {
@@ -119,7 +118,7 @@ class HotelForm extends Component {
                         </select>
                     </div>
                 </div>
-                <button type="submit" className="btnSubmit">Save</button>
+                <button type="submit" className="btn btnSubmit">Save</button>
             </form>
         );
     }

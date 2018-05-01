@@ -62,7 +62,7 @@ class Admin extends Component {
                 <h2>Add Hotel</h2>
                 <HotelForm addHotel={this.addHotel} amenities={this.state.amenities} priceCategories={this.state.priceCategories}/>
                 <h2>View Hotels</h2>
-                <HotelList hotels={this.state.hotels} deleteHotel={this.deleteHotel} amenities={this.state.amenities} priceCategories={this.state.priceCategories}/>
+                <HotelList admin={true} hotels={this.state.hotels} deleteHotel={this.deleteHotel} amenities={this.state.amenities} priceCategories={this.state.priceCategories}/>
             </div>
         );
     }
