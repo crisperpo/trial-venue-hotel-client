@@ -8,31 +8,16 @@ class Admin extends Component {
         super(props);
 
         this.state = {
-            hotels: [],
-            priceCategories: {
-                low: 'Low',
-                medium: 'Medium',
-                high: 'High'
-            },
-            amenities: {
-                free_parking: 'Free parking',
-                free_wifi: 'Free wifi',
-                pets: 'Pets',
-                restaurant: 'Restaurant',
-                gym: 'Gym',
-                pool: 'Pool',
-                spa: 'Spa'
-            }
+            hotels: []
         };
-
-        axios.get("http://localhost:3000/hotels").then(res => {
-            var hotels = res.data;
-            this.setState({ hotels });
-        });
         this.addHotel = this.addHotel.bind(this);
         this.deleteHotel = this.deleteHotel.bind(this);
     }
-
+    componentWillReceiveProps(){
+        this.setState({
+            hotels: this.props.hotels
+        });
+    }
     addHotel(e, newHotel) {
         if (newHotel) {
             axios.post("http://localhost:3000/hotels/", newHotel ).then(res => {
@@ -57,12 +42,14 @@ class Admin extends Component {
         });
     }
     render() {
+        var p = this.props;
+
         return (
             <div className="adminView">
                 <h2>Add Hotel</h2>
-                <HotelForm addHotel={this.addHotel} amenities={this.state.amenities} priceCategories={this.state.priceCategories}/>
+                <HotelForm addHotel={this.addHotel} amenities={p.amenities} priceCategories={p.priceCategories}/>
                 <h2>View Hotels</h2>
-                <HotelList admin={true} hotels={this.state.hotels} deleteHotel={this.deleteHotel} amenities={this.state.amenities} priceCategories={this.state.priceCategories}/>
+                <HotelList admin={true} hotels={this.state.hotels} deleteHotel={this.deleteHotel} amenities={p.amenities} priceCategories={p.priceCategories}/>
             </div>
         );
     }
