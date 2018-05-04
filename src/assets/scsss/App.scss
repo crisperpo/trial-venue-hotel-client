@@ -1,21 +1,9 @@
 /*Variables*/
 $color-bg: #FFFFFF;
-$color-item-bg: #FAFAFA;
-
-$color-border-head-top: #296CAF;
-$color-border-head-bottom: #CCCCCC;
-$color-border-div: #808080;
+$color-blue: #2A73b7;
+$color-red: #a94442;
 $color-font-text: #808080;
-$color-font-title: #2A73b7;
-$color-font-link: #2A73b7;
-$color-icon: #2A73b7;
-$color-menu-shadow: #CCCCCC;
-$color-modal-btn-bg: #2A73b7;
-$color-modal-btn-text: #FFFFFF;
-$color-modal-title: #2A73b7;
-$color-field-invalid: #a94442;
-$color-field-valid: #3c763d;
-
+$color-border: #CCCCCC;
 $font-light: Roboto-Light;
 $font-regular: Roboto-Regular;
 $font-weight: 500;
@@ -45,15 +33,15 @@ body {
 
 body, p {
   color: $color-font-text;
-  font-family: $font-regular;
-  font-weight: $font-weight;
+  font-family: $font-light;
+  font-weight: normal;
   line-height: 1em;
   font-size: 10pt;
 }
 
 input, select, textarea {
   color: $color-font-text;
-  font-family: $font-regular;
+  font-family: $font-light;
   font-size: 10pt;
   font-weight: $font-weight;
   line-height: 1.55em;
@@ -61,7 +49,7 @@ input, select, textarea {
 
 h1 {
   font-family: $font-light;
-  color: $color-font-title;
+  color: $color-blue;
   margin-bottom: 0.5em;
   font-size: 16pt;
   line-height: 1em;
@@ -69,7 +57,7 @@ h1 {
 
 h2 {
   font-family: $font-light;
-  color: $color-font-title;
+  color: $color-blue;
   font-size: 12pt;
   margin-bottom: 1em;
   line-height: 1em;
@@ -77,8 +65,9 @@ h2 {
 
 h3 {
   font-family: $font-light;
-  color: $color-font-title;
+  color: $color-blue;
   font-size: 10pt;
+  font-weight: normal;
   margin-bottom: 0.3em;
   line-height: 1em;
 }
@@ -91,7 +80,7 @@ p {
 }
 
 a {
-  color: $color-font-link;
+  color: $color-blue;
   font-size: 10pt;
   text-decoration: none;
 }
@@ -115,10 +104,10 @@ img {
   width: 100%;
   padding: 1em 0;
   background: $color-bg;
-  border-top: 4px solid $color-border-head-top;
-  box-shadow: 0 1px 4px $color-border-head-bottom;
-  -moz-box-shadow: 0 1px 4px $color-border-head-bottom;
-  -webkit-box-shadow: 0 1px 4px $color-border-head-bottom;
+  border-top: 4px solid $color-blue;
+  box-shadow: 0 1px 4px $color-border;
+  -moz-box-shadow: 0 1px 4px $color-border;
+  -webkit-box-shadow: 0 1px 4px $color-border;
 
   .titleWrap {
     flex-grow: 1;
@@ -147,7 +136,7 @@ img {
     white-space: nowrap;
     text-align: right;
     padding: 0 10px;
-    border-left: 1px dashed $color-border-head-bottom;
+    border-left: 1px dashed $color-border;
 
     i {
       font-size: 1.5em;
@@ -155,7 +144,6 @@ img {
   }
 }
 
-/*Grid*/
 .flex-grid {
   display: flex;
   justify-content: flex-start;
@@ -170,8 +158,8 @@ img {
 }
 
 .btn {
-  background-color: $color-modal-btn-bg;
-  color: $color-modal-btn-text;
+  background-color: $color-blue;
+  color: $color-bg;
   font-family: $font-regular;
   font-size: 1em;
   font-weight: 500;
@@ -184,6 +172,26 @@ img {
   padding: 0;
   width: 50px;
   display: inline-block;
+  cursor: pointer;
+}
+.btn-sm {
+  background-color: $color-blue;
+  border: 0px solid $color-blue;
+  color: $color-bg;
+  padding: 3px;
+  line-height: 10px;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-blue;
+    background-color: $color-bg;
+    border: 1px solid $color-blue;
+    cursor: pointer;
+  }
+  &:focus {
+    border: none;
+  }
 }
 
 /*Content*/
@@ -191,112 +199,183 @@ img {
   width: 100%;
   margin: 6em 1em 1em;
 
-  /*Admin View*/
-  .adminView, .homeView {
-    .addHotelForm {
-      border-bottom: 1px dotted $color-border-head-bottom;
-      margin-bottom: 1em;
-      padding-bottom: 1em;
+  .hotelForm {
+    border-bottom: 1px dotted $color-border;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
 
-      .fieldsContainer {
+    .fieldsContainer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .fieldWrap {
+        flex-basis: 150px;
+        margin-bottom: 0.5em;
+        padding: 5px;
+
+        label {
+          font-family: $font-light;
+          font-size: 0.9em;
+          display: block;
+          text-align: left;
+        }
+
+        input, select {
+          border-width: 1px;
+          border-style: solid;
+          border-color: $color-border;
+          background-color: $color-bg;
+          font-family: $font-light;
+          font-size: 0.9em;
+          padding: 3px;
+          border-radius: 3px;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          box-sizing: border-box;
+          width: 100%;
+
+          &.invalid {
+            border: 1px solid $color-red;
+            background: url(../img/icons/icn_exclamation_circle_fill_red.svg) no-repeat scroll 4px 4px;
+            background-position: right;
+            background-size: 14px;
+          }
+        }
+        select {
+          padding: 4px;
+        }
+      }
+    }
+  }
+
+  .confirmationView {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+
+    h2 {
+      text-align: center;
+    }
+    h2, h3 {
+      span {
+        color: $color-font-text;
+      }
+    }
+    p {
+      text-align: center;
+    }
+
+    .confirmationWrap {
+      flex-grow: 3;
+      background-color: $color-bg;
+      box-shadow: 0 1px 4px $color-border;
+      -moz-box-shadow: 0 1px 4px $color-border;
+      -webkit-box-shadow: 0 1px 4px $color-border;
+      border-radius: 3px;
+      padding: 1em;
+
+      .infoWrap {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
 
-        .fieldWrap {
-          flex-basis: 150px;
-          margin-bottom: 0.5em;
-          padding: 5px;
-
-          label {
-            font-family: $font-light;
-            font-size: 0.9em;
-            display: block;
-            text-align: left;
-          }
-
-          input, select {
-            border-width: 1px;
-            border-style: solid;
-            border-color: $color-border-head-bottom;
-            background-color: $color-bg;
-            font-family: $font-light;
-            font-size: 0.9em;
-            padding: 3px;
-            border-radius: 3px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            box-sizing: border-box;
-            width: 100%;
-
-            &.invalid {
-              border: 1px solid $color-field-invalid;
-              background: url(../img/icons/icn_exclamation_circle_fill_red.svg) no-repeat scroll 4px 4px;
-              background-position: right;
-              background-size: 14px;
-            }
-          }
-          select {
-            padding: 4px;
-          }
+        .hotelInfo,.roomInfo {
+          flex-grow: 0.9;
+          margin: 5px;
+        }
+        h2, p {
+          text-align: left;
         }
       }
     }
+    .actionsWrap {
+      padding-left: 1em;
 
-    .hotelList {
-      .hotelContainer {
+      .btnPrint {
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .detailView {
+    max-width: 800px;
+    margin: 0 auto;
+
+    .hotelDetailContainer {
+      background-color: $color-bg;
+      box-shadow: 0 1px 4px $color-border;
+      -moz-box-shadow: 0 1px 4px $color-border;
+      -webkit-box-shadow: 0 1px 4px $color-border;
+      border-radius: 3px;
+      padding: 1.5em;
+      margin-bottom: 1em;
+
+      h2, h3 {
+        span {
+          color: $color-font-text;
+          word-break: break-all;
+        }
+      }
+
+      .imageContainer {
+        flex-basis: 300px;
+        flex-grow: 2;
+        text-align: left;
+        margin-right: 1em;
+
+        img {
+          display: inline-flex;
+          max-width: 100%;
+        }
+      }
+
+      .featuresContainer {
+        flex-basis: 300px;
+        flex-grow: 2;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+
+        p, span {
+          line-height: 1.5em;
+        }
+        h1, .price {
+          text-align: center;
+        }
+        .rating {
+          background-color: $color-blue;
+          border-radius: 50%;
+          width: 75px;
+          height: 75px;
+          line-height: 75px;
+          margin: 0 auto;
+          text-align: center;
+          color: $color-bg;
+          font-weight: bold;
+          font-size: 18px;
+        }
+      }
+    }
+    .roomList {
+      border-top: 1px dashed $color-border;
+      padding: 1em 0;
+
+      .roomContainer {
         background-color: $color-bg;
-        box-shadow: 0 1px 4px $color-border-head-bottom;
-        -moz-box-shadow: 0 1px 4px $color-border-head-bottom;
-        -webkit-box-shadow: 0 1px 4px $color-border-head-bottom;
+        box-shadow: 0 1px 4px $color-border;
+        -moz-box-shadow: 0 1px 4px $color-border;
+        -webkit-box-shadow: 0 1px 4px $color-border;
         border-radius: 3px;
         padding: 1.5em;
         margin-bottom: 1em;
-        position: relative;
+        flex-basis: 150px;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        font: inherit;
 
-        .btn-sm {
-          background-color: $color-font-title;
-
-          border: 0px solid $color-font-title;
-          color: $color-bg;
-          padding: 3px;
-          line-height: 10px;
-          font-weight: bold;
-
-          &:hover {
-            color: $color-font-title;
-            background-color: $color-bg;
-            border: 1px solid $color-font-title;
-            cursor: pointer;
-          }
-          &:focus {
-            border: none;
-          }
-
-          &.btnClose {
-            border-radius: 50%;
-            position: absolute;
-            right: -5px;
-            top: -5px;
-
-            &:after {
-              content: '×';
-            }
-          }
-
-          &.btnMoreInfo {
-            position: absolute;
-            bottom: -10px;
-            right: 45%;
-            padding: 5px;
-            font-size: 12px;
-            border-radius: 2px;
-
-            &:after {
-              content: '+';
-            }
-          }
-        }
         h3 {
           &:last-of-type {
             margin-bottom: 0;
@@ -307,67 +386,228 @@ img {
           word-break: break-all;
           font-size: 0.8em;
         }
-        .featuresContainer {
-          flex-grow: 2;
 
-          .features {
-            height: 100%;
-            flex-basis: 50px;
-            flex-wrap: nowrap;
-            justify-content: space-between;
+        .infoContainer {
+          height: 100%;
+          flex-grow: 3;
+        }
+        .bookingContainer {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: initial;
+          justify-content: space-between;
+          height: 100%;
+          min-height: 85px;
 
-            .infoContainer {
-              height: 100%;
-              flex-grow: 3;
-
-              .price {
-                font-weight: bold;
-              }
-            }
-            .bookingContainer {
-
-              display: flex;
-              flex-direction: column;
-              flex-wrap: initial;
-
-              justify-content: space-between;
-              height: 100%;
-
-              .btnDetail {
-                width: 100%;
-                cursor: pointer;
-              }
-              .rating {
-                background-color: $color-border-head-top;
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                line-height: 50px;
-                margin: 0 auto;
-                text-align: center;
-                color: $color-bg;
-                font-weight: bold;
-                font-size: 16px;
-              }
-            }
+          .btnBook {
+            width: 100%;
+            cursor: pointer;
           }
-        }
-        .moreFeatures {
-          width: 100%;
-          margin-top: 1em;
-        }
-        .imageContainer {
-          text-align: left;
-          margin-right: 1em;
-
-          img {
-            display: inline-flex;
-            max-width: 100%;
+          .price {
+            background-color: $color-blue;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            margin: 0 auto;
+            text-align: center;
+            color: $color-bg;
+            font-weight: bold;
+            font-size: 12px;
           }
         }
       }
     }
+  }
 
+  .homeView {
+    max-width: 800px;
+    margin: 0 auto;
+
+    .hotelContainer {
+      background-color: $color-bg;
+      box-shadow: 0 1px 4px $color-border;
+      -moz-box-shadow: 0 1px 4px $color-border;
+      -webkit-box-shadow: 0 1px 4px $color-border;
+      border-radius: 3px;
+      padding: 1.5em;
+      margin-bottom: 1em;
+      position: relative;
+
+      .btnMoreInfo {
+        position: absolute;
+        bottom: -10px;
+        right: 45%;
+        padding: 5px;
+        font-size: 12px;
+        border-radius: 2px;
+
+        &:after {
+          content: '+';
+        }
+      }
+      h3 {
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+        span {
+          color: $color-font-text;
+          word-break: break-all;
+        }
+      }
+
+      .featuresContainer {
+        flex-grow: 2;
+
+        .features {
+          height: 100%;
+          flex-basis: 50px;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+
+          .infoContainer {
+            height: 100%;
+            flex-grow: 3;
+
+            .price {
+              font-weight: bold;
+            }
+          }
+          .bookingContainer {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: initial;
+            justify-content: space-between;
+            height: 100%;
+
+            .btnDetail {
+              width: 100%;
+              cursor: pointer;
+            }
+
+            .rating {
+              background-color: $color-blue;
+              border-radius: 50%;
+              width: 50px;
+              height: 50px;
+              line-height: 50px;
+              margin: 0 auto;
+              text-align: center;
+              color: $color-bg;
+              font-weight: bold;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+      .moreFeatures {
+        width: 100%;
+        margin-top: 1em;
+      }
+      .imageContainer {
+        text-align: left;
+        margin-right: 1em;
+
+        img {
+          display: inline-flex;
+          max-width: 100%;
+        }
+      }
+    }
+  }
+
+  .adminView {
+    max-width: 800px;
+    margin: 0 auto;
+
+    .hotelContainer {
+      background-color: $color-bg;
+      box-shadow: 0 1px 4px $color-border;
+      -moz-box-shadow: 0 1px 4px $color-border;
+      -webkit-box-shadow: 0 1px 4px $color-border;
+      border-radius: 3px;
+      padding: 1.5em;
+      margin-bottom: 1em;
+      position: relative;
+
+      .btnClose {
+        border-radius: 50%;
+        position: absolute;
+        right: -5px;
+        top: -5px;
+
+        &:after {
+          content: '×';
+        }
+      }
+
+      h3 {
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+        span {
+          color: $color-font-text;
+          word-break: break-all;
+        }
+      }
+
+      .featuresContainer {
+        flex-grow: 2;
+
+        .features {
+          height: 100%;
+          flex-basis: 50px;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+
+          .infoContainer {
+            height: 100%;
+            flex-grow: 3;
+
+            .price {
+              font-weight: bold;
+            }
+          }
+          .bookingContainer {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: initial;
+            justify-content: space-between;
+            height: 100%;
+
+            .btnDetail {
+              width: 100%;
+              cursor: pointer;
+            }
+            .rating {
+              background-color: $color-blue;
+              border-radius: 50%;
+              width: 50px;
+              height: 50px;
+              line-height: 50px;
+              margin: 0 auto;
+              text-align: center;
+              color: $color-bg;
+              font-weight: bold;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+      .moreFeatures {
+        width: 100%;
+        margin-top: 1em;
+      }
+      .imageContainer {
+        text-align: left;
+        margin-right: 1em;
+
+        img {
+          display: inline-flex;
+          max-width: 100%;
+        }
+      }
+    }
   }
 
 }
@@ -375,8 +615,7 @@ img {
 /********************************************************************************/
 /*MEDIA QUERIES
 /********************************************************************************/
-@media all and (max-width: 645px) {
-
+@media all and (max-width: 550px) {
   h2 {
     font-size: 11pt;
   }
@@ -387,7 +626,6 @@ img {
       flex-basis: unset;
     }
   }
-
   #header {
     padding: 0.5em;
 
@@ -407,7 +645,7 @@ img {
   .content {
     margin-top: 4em;
 
-    p, input, select, textarea, a {
+    input, select, textarea, a {
       font-size: 8pt;
     }
   }
@@ -416,6 +654,7 @@ img {
 @media all and (max-width: 400px) {
   .flex-grid {
     display: block;
+
     .col, .col-sm {
       width: 100%;
       margin: 0 0 10px 0;
@@ -431,7 +670,6 @@ img {
         max-height: unset;
       }
     }
-
   }
   .fieldsContainer {
     display: block !important;

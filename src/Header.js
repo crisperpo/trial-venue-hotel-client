@@ -14,7 +14,7 @@ class Header extends Component {
                 </div>
                 <div className="userMenu">
                     <i>&#9786;</i>
-                    <span>John Doe</span>
+                    <span>{this.props.userName} {this.props.userSurname}</span>
                     <i>&#8964; </i>
                 </div>
             </header>

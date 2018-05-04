@@ -32,13 +32,13 @@ class FilterForm extends Component {
             optionsPriceCategories = Object.entries(this.props.priceCategories).map(this.createSelectOptions);
 
         return(
-            <form onSubmit={this.addHotel} className="addHotelForm" ref={(r) => this._filterHotelForm = r}>
+            <form onSubmit={this.addHotel} className="hotelForm" ref={(r) => this._filterHotelForm = r}>
                 <div className="fieldsContainer">
                     <div className="fieldWrap">
                         <label className="inputLabel">
                             Distance to venue
                         </label>
-                        <input type="number" step="0.01" className="formControl" id="distance_to_venue" onChange={this.handleChange} onBlur={this.handleChange} placeholder="Distance to venue..." />
+                        <input type="number" min="0" step="0.01" className="formControl" id="distance_to_venue" onChange={this.handleChange} onBlur={this.handleChange} placeholder="Distance to venue..." />
                     </div>
                     <div className="fieldWrap">
                         <label className="inputLabel">
@@ -59,7 +59,8 @@ class FilterForm extends Component {
                         <label className="inputLabel">
                             Amenities
                         </label>
-                        <select multiple className="formControl" id="amenities" onChange={this.handleChange} onBlur={this.handleChange}>
+                        <select  multiple className="formControl" id="amenities" onChange={this.handleChange} onBlur={this.handleChange}>
+                            <option selected value="">Select amenities...</option>
                             {optionsAmenities}
                         </select>
                     </div>

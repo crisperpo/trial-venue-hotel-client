@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import HotelList from "./HotelList";
 import HotelForm from "./HotelForm";
-import axios from "axios/index";
 
 class Admin extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            hotels: []
+            hotels: props.hotels
         };
         this.addHotel = this.addHotel.bind(this);
         this.deleteHotel = this.deleteHotel.bind(this);
+        this.getOptionsLabels = this.getOptionsLabels.bind(this);
     }
     componentWillReceiveProps(){
         this.setState({
@@ -19,27 +19,13 @@ class Admin extends Component {
         });
     }
     addHotel(e, newHotel) {
-        if (newHotel) {
-            axios.post("http://localhost:3000/hotels/", newHotel ).then(res => {
-                this.setState((prevState) => {
-                    return {
-                        hotels: prevState.hotels.concat(newHotel)
-                    };
-                });
-            });
-        }
-        e.preventDefault();
+        this.props.addHotel(e, newHotel);
     }
     deleteHotel(id) {
-        var updatedHotels = this.state.hotels.filter(function (hotel) {
-            return hotel.id !== id;
-        });
-
-        axios.delete("http://localhost:3000/hotels/" + id).then(res => {
-            this.setState({
-                hotels: updatedHotels
-            });
-        });
+        this.props.deleteHotel(id);
+    }
+    getOptionsLabels(allOptions, selectedOptions) {
+        return this.props.getOptionsLabels(allOptions, selectedOptions);
     }
     render() {
         var p = this.props;
@@ -49,7 +35,7 @@ class Admin extends Component {
                 <h2>Add Hotel</h2>
                 <HotelForm addHotel={this.addHotel} amenities={p.amenities} priceCategories={p.priceCategories}/>
                 <h2>View Hotels</h2>
-                <HotelList admin={true} hotels={this.state.hotels} deleteHotel={this.deleteHotel} amenities={p.amenities} priceCategories={p.priceCategories}/>
+                <HotelList adminView={true} hotels={this.state.hotels} deleteHotel={this.deleteHotel} amenities={p.amenities} priceCategories={p.priceCategories} getOptionsLabels={this.getOptionsLabels}/>
             </div>
         );
     }

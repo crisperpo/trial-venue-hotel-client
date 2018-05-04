@@ -8,20 +8,13 @@ class HotelContainer extends Component {
             isMoreInfoVisible: false
         }
         this.toggleMoreInfo = this.toggleMoreInfo.bind(this);
+        this.getOptionsLabels = this.getOptionsLabels.bind(this);
     }
     deleteHotel(id) {
         this.props.deleteHotel(id);
     }
     getOptionsLabels(allOptions, selectedOptions) {
-        var amenitiesLabels = [];
-        if (!Array.isArray(selectedOptions)) {
-            return allOptions[selectedOptions];
-        }
-
-        for (var i = 0, l = selectedOptions.length; i < l; i++) {
-            amenitiesLabels.push( allOptions[selectedOptions[i]] );
-        }
-        return amenitiesLabels.join(", ");
+        return this.props.getOptionsLabels(allOptions, selectedOptions);
     }
     toggleMoreInfo() {
         this.setState({
@@ -30,18 +23,18 @@ class HotelContainer extends Component {
     }
     render(){
         var h = this.props.hotel,
-            isAdmin = this.props.admin,
+            isAdmin = this.props.adminView,
             amenities = this.props.amenities,
             priceCategories = this.props.priceCategories;
 
         return(
             <div className="hotelContainer flex-grid">
-                {isAdmin ? <button className="btn-sm btnClose" onClick={() => this.deleteHotel(h.id)}></button> : <button className="btn-sm btnMoreInfo" onClick={this.toggleMoreInfo}></button>}
+                {(isAdmin) ? <button className="btn-sm btnClose" onClick={() => this.deleteHotel(h.id)}></button> : <button className="btn-sm btnMoreInfo" onClick={this.toggleMoreInfo}></button>}
                 <div className="imageContainer col">
-                    <img src={"img/" + h.images[0]} className="imgResponsive" alt={h.name} />
+                    <img src={"/img/" + h.images[0]} className="imgResponsive" alt={h.name} />
                 </div>
                 <div className="featuresContainer col">
-                    {this.props.admin ? (
+                    {this.props.adminView ? (
                         <div className="featuresAdmin">
                             <h3>Name: <span>{h.name}</span></h3>
                             <h3>Description: <span>{h.description}</span></h3>
@@ -58,14 +51,15 @@ class HotelContainer extends Component {
                             </div>
                             <div className="bookingContainer col-sm">
                                 <div className="rating">{h.rating}</div>
-                                <NavLink exact to={"/hotels/"+h.id}>
+                                <NavLink exact to={"/detail/"+h.id}>
                                     <button className="btn btnDetail">Details</button>
                                 </NavLink>
                             </div>
                         </div>
                     )}
                 </div>
-                {this.state.isMoreInfoVisible && !this.props.admin && <div className="moreFeatures">
+                {(this.state.isMoreInfoVisible && !this.props.adminView) &&
+                <div className="moreFeatures">
                     <p>{h.description}</p>
                     <h3>Distance to venue: <span>{h.distance_to_venue}</span></h3>
                     <h3>Amenities: <span>{this.getOptionsLabels(amenities, h.amenities)}</span></h3>

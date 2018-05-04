@@ -6,16 +6,20 @@ class HotelList extends Component {
         super(props);
         this.createHotels = this.createHotels.bind(this);
         this.deleteHotel = this.deleteHotel.bind(this);
+        this.getOptionsLabels = this.getOptionsLabels.bind(this);
     }
     createHotels(hotel) {
-        return <HotelContainer admin={this.props.admin} key={hotel.id} hotel={hotel} deleteHotel={this.deleteHotel} amenities={this.props.amenities} priceCategories={this.props.priceCategories}/>
+        return <HotelContainer adminView={this.props.adminView} key={hotel.id} hotel={hotel} deleteHotel={this.deleteHotel} amenities={this.props.amenities} priceCategories={this.props.priceCategories} getOptionsLabels={this.getOptionsLabels}/>
     }
     deleteHotel(id) {
         this.props.deleteHotel(id);
     }
+    getOptionsLabels(allOptions, selectedOptions) {
+        return this.props.getOptionsLabels(allOptions, selectedOptions);
+    }
     render() {
-        var hotelEntries = this.props.hotels;
-        var listHotels = hotelEntries.map(this.createHotels);
+        var hotelEntries = this.props.hotels,
+            listHotels = hotelEntries.map(this.createHotels);
         return(
             <div className="hotelList">
                 {listHotels}

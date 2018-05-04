@@ -58,6 +58,7 @@ class HotelForm extends Component {
             if (!self.isFieldValid(field)) {
                 isValid = false;
             }
+            return true;
         });
         return isValid;
     }
@@ -75,7 +76,7 @@ class HotelForm extends Component {
             optionsPriceCategories = Object.entries(this.props.priceCategories).map(this.createSelectOptions);
 
         return(
-            <form onSubmit={this.addHotel} className="addHotelForm" ref={(r) => this._addHotelForm = r}>
+            <form onSubmit={this.addHotel} className="hotelForm" ref={(r) => this._addHotelForm = r}>
                 <div className="fieldsContainer">
                     <div className="fieldWrap">
                         <label className="inputLabel">

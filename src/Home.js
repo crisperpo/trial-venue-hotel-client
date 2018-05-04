@@ -7,14 +7,19 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            filteredHotels: []
+            filteredHotels: this.props.hotels
         };
+
         this.filterHotels = this.filterHotels.bind(this);
+        this.getOptionsLabels = this.getOptionsLabels.bind(this);
     }
     componentWillReceiveProps(){
         this.setState({
             filteredHotels: this.props.hotels
         });
+    }
+    getOptionsLabels(allOptions, selectedOptions) {
+        return this.props.getOptionsLabels(allOptions, selectedOptions);
     }
     filterHotels(field, value) {
         var allHotels = this.props.hotels,
@@ -46,7 +51,8 @@ class Home extends Component {
                 }
                 break;
             case "amenities":
-                if (value.length === 0) {
+                console.log(value);
+                if (value.length === 0 || (value.length === 1 && value[0] === "")) {
                     updatedHotels = allHotels;
                 } else {
                     updatedHotels = updatedHotels.filter(function (hotel) {
@@ -56,6 +62,9 @@ class Home extends Component {
                         return matchedAmenities.length === value.length;
                     });
                 }
+                break;
+            default:
+                updatedHotels = allHotels;
                 break;
         }
 
@@ -70,7 +79,7 @@ class Home extends Component {
         return (
             <div className="homeView">
                 <FilterForm filterHotels={this.filterHotels} amenities={p.amenities} priceCategories={p.priceCategories}/>
-                <HotelList hotels={s.filteredHotels} deleteHotel={this.deleteHotel} amenities={p.amenities} priceCategories={p.priceCategories}/>
+                <HotelList hotels={s.filteredHotels} deleteHotel={this.deleteHotel} amenities={p.amenities} priceCategories={p.priceCategories} getOptionsLabels={this.getOptionsLabels}/>
             </div>
         );
     }
