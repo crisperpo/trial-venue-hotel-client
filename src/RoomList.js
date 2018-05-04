@@ -15,7 +15,7 @@ class RoomList extends Component {
     }
     render() {
         var roomEntries = this.props.rooms,
-            listRooms = roomEntries.map(this.createRooms);
+            listRooms = (roomEntries) ? roomEntries.map(this.createRooms) : <p>There are no rooms available.</p>;
 
         return (
             <div className="roomList">
